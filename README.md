@@ -1,5 +1,5 @@
 
-<img alt="Python" src="https://img.shields.io/badge/Python%20-%2314354C.svg?style=flat-square&logo=python&logoColor=white" /> <img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white&style=flat" /> <img alt="Plotly" src="https://img.shields.io/badge/Plotly-29B5E8?logo=Plotly&logoColor=white&style=flat" /> <img alt="Dash" src="https://img.shields.io/badge/Dash-29B5E8?logo=Dash&logoColor=white&style=flat" />
+<img alt="Python" src="https://img.shields.io/badge/Python%20-%2314354C.svg?style=flat-square&logo=python&logoColor=white" /> <img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white&style=flat" /> <img alt="Plotly" src="https://img.shields.io/badge/Plotly-3F4F75?logo=Plotly&logoColor=white&style=flat" /> <img alt="Dash" src="https://img.shields.io/badge/Dash-008DE4?logo=Dash&logoColor=white&style=flat" />
 
 
 # Monitor Webscraped Flight Prices using Dash and Plotly.
