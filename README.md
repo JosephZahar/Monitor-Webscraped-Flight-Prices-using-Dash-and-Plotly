@@ -19,3 +19,11 @@ The aim of this repository is to webscrape flight prices data from different air
 <img width="861" alt="Screen Shot 2022-12-17 at 10 51 08 AM" src="https://user-images.githubusercontent.com/70657426/208234060-7a080ef7-eb4b-44b2-98d2-148b1a2f6b97.png">
   
  
+### Built With
+- Data Processing & Manipulation: [Numpy](https://numpy.org), [Pandas](https://pandas.pydata.org)
+- Static and Dynamic Webscrapping: [BeautifulSoup](https://pypi.org/project/beautifulsoup4/), [selenium](https://pypi.org/project/selenium/)
+- Dashboard Infrastructure: [Dash](https://plotly.com/dash/)
+- Visualizations: [Plotly](https://plotly.com)
+
+## Features
+The Dashboard generated is daily updated with the flight prices webscrapped from different airlines. The visuals provided allow the user to derive insights and implement his own analyis that would potentially save a significant amount of money! The dashboard allows daily tracking and monitoring of prices and thus flight dates demand,allowing us to choose the most adequate departure and return dates for our planned trips.
