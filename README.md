@@ -15,8 +15,7 @@ The aim of this repository is to webscrape flight prices data from different air
 ## Overview
 ### Webscrapping Flight Prices
 
-
-<img width="861" alt="Screen Shot 2022-12-17 at 10 51 08 AM" src="https://user-images.githubusercontent.com/70657426/208234060-7a080ef7-eb4b-44b2-98d2-148b1a2f6b97.png">
+![Screen Shot 2023-01-29 at 5 30 47 PM](https://user-images.githubusercontent.com/70657426/215344664-ce26709e-eea2-4a8e-895a-ae782ea5092c.png)
   
  
 ### Built With
