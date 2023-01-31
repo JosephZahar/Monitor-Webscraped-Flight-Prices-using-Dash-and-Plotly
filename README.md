@@ -17,13 +17,17 @@ The aim of this repository is to webscrape flight prices data from different air
 
 > Prototype Blueprints
 
-![Screen Shot 2023-01-31 at 12 06 29 AM](https://user-images.githubusercontent.com/70657426/215624899-78afe9c4-732b-4632-b673-6d9e98989f6e.png)
- 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/70657426/215624899-78afe9c4-732b-4632-b673-6d9e98989f6e.png">
+</p>
+
  <br>
  
 > Actual Dashboard
 
-![Screen Shot 2023-01-31 at 12 07 49 AM](https://user-images.githubusercontent.com/70657426/215625106-606b1866-851f-47c3-97b1-bbb31e529bea.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/70657426/215625781-460323ff-1e76-44d1-874b-3c64650d1f61.png">
+</p>
 
 ### Built With
 - Data Processing & Manipulation: [Numpy](https://numpy.org), [Pandas](https://pandas.pydata.org)
