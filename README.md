@@ -15,9 +15,16 @@ The aim of this repository is to webscrape flight prices data from different air
 ## Overview
 ### Webscrapping Flight Prices
 
+> Prototype Blueprints
+
 ![Screen Shot 2023-01-31 at 12 06 29 AM](https://user-images.githubusercontent.com/70657426/215624899-78afe9c4-732b-4632-b673-6d9e98989f6e.png)
-  
  
+ <br>
+ 
+> Actual Dashboard
+
+![Screen Shot 2023-01-31 at 12 07 49 AM](https://user-images.githubusercontent.com/70657426/215625106-606b1866-851f-47c3-97b1-bbb31e529bea.png)
+
 ### Built With
 - Data Processing & Manipulation: [Numpy](https://numpy.org), [Pandas](https://pandas.pydata.org)
 - Static and Dynamic Webscrapping: [BeautifulSoup](https://pypi.org/project/beautifulsoup4/), [selenium](https://pypi.org/project/selenium/)
