@@ -25,9 +25,7 @@ The aim of this repository is to webscrape flight prices data from different air
  
 > Actual Dashboard
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/70657426/215625781-460323ff-1e76-44d1-874b-3c64650d1f61.png">
-</p>
+
 
 ### Built With
 - Data Processing & Manipulation: [Numpy](https://numpy.org), [Pandas](https://pandas.pydata.org)
