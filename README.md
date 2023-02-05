@@ -18,12 +18,13 @@ The aim of this repository is to webscrape flight prices data from different air
 > Prototype Blueprints
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/70657426/215624899-78afe9c4-732b-4632-b673-6d9e98989f6e.png">
+<img src="https://user-images.githubusercontent.com/70657426/216797367-e675ede0-21e6-4d29-be21-dda87e7e2cf5.png">
 </p>
 
  <br>
  
 > Actual Dashboard
+
 
 
 
