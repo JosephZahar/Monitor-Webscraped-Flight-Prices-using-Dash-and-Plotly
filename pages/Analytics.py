@@ -1,7 +1,7 @@
 # import desired libraries
 import calendar
 from datetime import date, timedelta
-
+import plotly.express as px
 import pandas as pd
 import plotly.io as pio
 
@@ -25,19 +25,21 @@ unfiltered_ret_df = flights_df[flights_df.type == 'Return']
 def flight_scrapper_dash(departure_date, return_date):
     df = flights_df.copy()
     if departure_date != 'All' and return_date != 'All':
-        df = df[df.flight_date.str.contains([departure_date, return_date])]
+        departure_df = df[df.flight_date == departure_date]
+        return_df = df[df.flight_date == return_date]
     elif departure_date != 'All':
-        df = df[df.flight_date.str.contains(departure_date)]
+        departure_df = df[df.flight_date == departure_date]
+        return_df = df[df.type == 'Return']
     elif return_date != 'All':
-        df = df[df.flight_date.str.contains(return_date)]
+        departure_df = df[df.type == 'Departure']
+        return_df = df[df.flight_date == return_date]
     else:
-        df = df.copy()
+        departure_df = df[df.type == 'Departure']
+        return_df = df[df.type == 'Return']
 
     today = date.today()
     week_prior = today - timedelta(weeks=1)
 
-    departure_df = df[df.type == 'Departure']
-    return_df = df[df.type == 'Return']
     tot_df = df[df.type == 'Total']
 
     prev_week_df = tot_df[tot_df['timestamp'] <= week_prior]
@@ -81,6 +83,7 @@ def flight_scrapper_dash(departure_date, return_date):
 
     indicators_flights.add_trace(go.Indicator(
         mode="number",
+        value= 0,
         number={'prefix': f"{calendar.day_name[df[df.price==departure_df.price.min()]['timestamp'].values[0].weekday()]}"},
         title={"text": f"<br><span style=';color:black'> Optimal Booking <br> Day </span>",
                "font": {"size": 20}},
@@ -90,10 +93,12 @@ def flight_scrapper_dash(departure_date, return_date):
         grid={'rows': 1, 'columns': 5, 'pattern': "independent"},
         margin=dict(l=10, r=10, t=10, b=10))
 
-    avg_prices = df.groupby('type')['price'].mean().T
-    data = pd.DataFrame({'Price': [round(avg_prices['Departure'],2), round(avg_prices['Return'],2), round(avg_prices['Total'],2)],
+    avg_return = return_df.groupby('type')['price'].mean()[0]
+    avg_departure = departure_df.groupby('type')['price'].mean()[0]
+    avg_total = round(avg_departure + avg_return, 2)
+    data = pd.DataFrame({'Price': [round(avg_departure,2), round(avg_return,2), avg_total],
                          'Label': ["Departure", "Return", "Roundtrip"],
-                         'colors': ["cornflowerblue", "red", "greenyellow"]})
+                         'colors': ["#648FFF", "#DC267F", "#FFB000"]})
 
     data = data.sort_values(['Price'], ascending=False)
     fig1 = go.Figure(go.Sunburst(
@@ -109,22 +114,22 @@ def flight_scrapper_dash(departure_date, return_date):
 
     fig2 = go.Figure()
     fig2.add_trace(go.Box(x=tot_df['price'], name='Roundtrip Flights',
-                          fillcolor='greenyellow',
-                          marker_color='greenyellow',
+                          fillcolor='#FFB000',
+                          marker_color='#FFB000',
                           customdata=tot_df['flight_date'],
                           line={"color": "black"},
                           hovertemplate='Flight Date: %{customdata}<extra></extra>',
                           boxpoints='all'))
     fig2.add_trace(go.Box(x=return_df['price'], name='Return Flights',
-                          fillcolor='red',
-                          marker_color='red',
+                          fillcolor='#DC267F',
+                          marker_color='#DC267F',
                           customdata=return_df['flight_date'],
                           line={"color": "black"},
                           hovertemplate='Flight Date: %{customdata}<extra></extra>',
                           boxpoints='all'))
     fig2.add_trace(go.Box(x=departure_df['price'], name='Departure Flights',
-                          fillcolor='cornflowerblue',
-                          marker_color='cornflowerblue',
+                          fillcolor='#648FFF',
+                          marker_color='#648FFF',
                           customdata=departure_df['flight_date'],
                           line={"color": "black"},
                           hovertemplate='Flight Date: %{customdata}<extra></extra>',
@@ -142,13 +147,15 @@ def flight_scrapper_dash(departure_date, return_date):
     fig3.add_trace(go.Histogram(
         x=unfiltered_dep_df['flight_date'],
         y=unfiltered_dep_df['price'],
-        marker_color='cornflowerblue',
+        marker_color='#648FFF',
+        texttemplate="%{y}$",
+        cliponaxis=False,
         histfunc='avg',
     ))
     fig3.update_layout(title="Average Departure Date Price",
     xaxis_title="Departure Date",
     yaxis_title="Average Price ($)",
-    bargap=0.6)
+    bargap=0.6,)
     fig3.update_xaxes(tickangle=25)
 
 
@@ -156,7 +163,9 @@ def flight_scrapper_dash(departure_date, return_date):
     fig4.add_trace(go.Histogram(
         x=unfiltered_ret_df['flight_date'],
         y=unfiltered_ret_df['price'],
-        marker_color='red',
+        marker_color='#DC267F',
+        texttemplate="%{y}$",
+        cliponaxis=False,
         histfunc='avg',
     ))
     fig4.update_layout(title="Average Return Date Price",
@@ -165,20 +174,38 @@ def flight_scrapper_dash(departure_date, return_date):
                        bargap=0.6)
     fig4.update_xaxes(tickangle=25)
 
+    df_line = df.groupby(["timestamp", "type"])["price"].mean().reset_index()
+    departure_line_df = departure_df.groupby(["timestamp", "type"])["price"].mean().reset_index()
+    return_line_df = return_df.groupby(["timestamp", "type"])["price"].mean().reset_index()
+    tot_price_line = [i+j for i,j in zip(departure_line_df["price"], return_line_df["price"])]
 
-    return indicators_flights, fig1, fig2, fig3, fig4
+    fig5 = go.Figure()
+    fig5.add_trace(go.Scatter(x=return_line_df["timestamp"], y=tot_price_line,
+                              mode='lines',
+                              name='Total', line=dict(color='#FFB000', width=4)))
+    fig5.add_trace(go.Scatter(x=departure_line_df["timestamp"], y=departure_line_df["price"],
+                             mode='lines',
+                             name='Departure', line=dict(color='#648FFF', width=4)))
+    fig5.add_trace(go.Scatter(x=return_line_df["timestamp"], y=return_line_df["price"],
+                              mode='lines',
+                              name='Return', line=dict(color='#DC267F', width=4)))
+    fig5.update_layout(xaxis_title="Webscraping date",
+                       yaxis_title="Average Price ($)")
+
+
+    return indicators_flights, fig1, fig2, fig3, fig4, fig5
 
 
 
-indicators_flights, fig1, fig2, fig3, fig4 = flight_scrapper_dash('All', 'All', )
+indicators_flights, fig1, fig2, fig3, fig4, fig5 = flight_scrapper_dash('All', 'All')
 
-departure_dropdown = dcc.Dropdown(options=list(set([i for i in unfiltered_dep_df['flight_date']])) + ['All'],
+departure_dropdown = dcc.Dropdown(options=sorted(list(set([i for i in unfiltered_dep_df['flight_date']])) + ['All']),
                                   id='departure_date',
                                   clearable=False,
                                   value='All', className="dbc",
                                   placeholder='Select a Departure Date', maxHeight=100)
 
-return_dropdown = dcc.Dropdown(options=list(set([i for i in unfiltered_ret_df['flight_date']])) + ['All'],
+return_dropdown = dcc.Dropdown(options=sorted(list(set([i for i in unfiltered_ret_df['flight_date']])) + ['All']),
                                id='return_date',
                                clearable=False,
                                value='All', className="dbc",
@@ -198,12 +225,19 @@ layout = dbc.Container(
              dcc.Graph(id='fig1', figure=fig1,
                        style={'height': 500}),
              html.Hr()
-         ], width={'size': 6, 'offset': 0, 'order': 1}),
+         ], width={'size': 4, 'offset': 0, 'order': 1}),
          dbc.Col([
              dcc.Graph(id='fig2', figure=fig2,
                        style={'height': 500}),
              html.Hr()
-         ], width={'size': 6, 'offset': 0, 'order': 2})]),
+         ], width={'size': 8, 'offset': 0, 'order': 2})]),
+
+    dbc.Row([dbc.Col([
+             dcc.Graph(id='fig5', figure=fig5,
+                       style={'height': 500}),
+             html.Hr()
+         ], width={'size': 12, 'offset': 0, 'order': 1}),
+         ]),
 
      dbc.Row([dbc.Col([
              dcc.Graph(id='fig3', figure=fig3,
