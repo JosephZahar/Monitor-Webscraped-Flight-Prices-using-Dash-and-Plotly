@@ -81,7 +81,6 @@ def flight_scrapper_dash(departure_date, return_date):
 
     indicators_flights.add_trace(go.Indicator(
         mode="number",
-        value= 0,
         number={'prefix': f"{calendar.day_name[df[df.price==departure_df.price.min()]['timestamp'].values[0].weekday()]}"},
         title={"text": f"<br><span style=';color:black'> Optimal Booking <br> Day </span>",
                "font": {"size": 20}},
