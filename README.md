@@ -4,7 +4,9 @@
 
 # Monitor Webscraped Flight Prices using Dash and Plotly.
 
-The aim of this repository is to webscrape flight prices data from different airlines and feed them directly into an interactive dashboard built using dash and Plotly.
+This open-source algorithm is designed to enable dynamic web scraping for monitoring flight prices on United Airlines' website. By leveraging the power of Python's pandas and selenium libraries, users can automate the process of checking for fluctuations in flight prices, saving valuable time and potentially reducing travel expenses. The algorithm offers adaptability, allowing users to explore data from various airlines or gather information for specific dates.
+
+Furthermore, the project extends beyond web scraping to encompass data analysis and visualization using Plotly and Dash. Through the integration of these powerful tools, users can create interactive dashboards that transform flight information into dynamic visuals and insightful graphs. This algorithm/platform unlocks the potential to uncover hidden patterns and gain deeper insights into the airline industry. Ultimately, it provides a flexible and user-friendly flight analytics solution, empowering users to make informed decisions about their travel plans and optimize their flight choices to save money and time.
 
 ## Table of Contents
 
