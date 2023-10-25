@@ -2,7 +2,7 @@
 <img alt="Python" src="https://img.shields.io/badge/Python%20-%2314354C.svg?style=flat-square&logo=python&logoColor=white" /> <img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white&style=flat" /> <img alt="Plotly" src="https://img.shields.io/badge/Plotly-3F4F75?logo=Plotly&logoColor=white&style=flat" /> <img alt="Dash" src="https://img.shields.io/badge/Dash-008DE4?logo=Dash&logoColor=white&style=flat" />
 
 
-# Monitor Webscraped Flight Prices using Dash and Plotly.
+# Monitor Webscraped Flight Prices using Dash and Plotly
 
 This open-source algorithm is designed to enable dynamic web scraping for monitoring flight prices on United Airlines' website. By leveraging the power of Python's pandas and selenium libraries, users can automate the process of checking for fluctuations in flight prices, saving valuable time and potentially reducing travel expenses. The algorithm offers adaptability, allowing users to explore data from various airlines or gather information for specific dates.
 
