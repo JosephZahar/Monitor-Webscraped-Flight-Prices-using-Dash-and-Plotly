@@ -27,8 +27,7 @@ Furthermore, the project extends beyond web scraping to encompass data analysis 
  
 > Actual Dashboard
 <p align="center">
-<img width="580" alt="Screen Shot 2023-07-10 at 5 51 17 PM" src="https://github.com/JosephZahar/Monitor-Webscraped-Flight-Prices-using-Dash-and-Plotly/assets/70657426/2a42427c-0d3f-4517-aaec-f8a20aca1366">
-
+<img src="https://github.com/JosephZahar/Monitor-Webscraped-Flight-Prices-using-Dash-and-Plotly/assets/70657426/c11053c6-2b63-466c-befe-c11a557b78dd.png">
 </p>
 
 
